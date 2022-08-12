@@ -29,4 +29,4 @@ jobs:
           known_hosts: "just-a-placeholder-so-we-dont-get-errors"
       - name: run playbook
         run: |
-          ansible-playbook ../ansible/deploy_server_app.yml --ssh-common-args='-o StrictHostKeyChecking=no'
+          ansible-playbook deploy_server_app.yml --ssh-common-args='-o StrictHostKeyChecking=no'
