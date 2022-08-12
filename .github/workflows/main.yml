@@ -37,7 +37,6 @@ jobs:
           script_stop: true
           script: |
             sudo docker-compose down
-            sudo docker rm weather
             sudo docker rmi ${{ secrets.DOCKER_USER }}/weather
             sudo docker pull ${{ secrets.DOCKER_USER }}/weather
             sudo docker-compose up -d
