@@ -1,0 +1,15 @@
+server_name: weather-application
+env: dev **check**
+
+vpc_name: weather-app-vpc
+network: 10.1.0.0/16
+subnet_pulic: 10.1.0.0/24
+env_name: weather
+zone: eu-central-1
+subnet1: eu-central-1a
+
+keypair: weather-keypair
+
+aws_centos_ami: ami-08b6d44b4f6f7b279
+Server_type: t2.micro
+server_volume_size: 8
