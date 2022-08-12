@@ -1,5 +1,5 @@
 server_name: weather-application
-env: dev **check**
+env: dev
 
 vpc_name: weather-app-vpc
 network: 10.1.0.0/16
