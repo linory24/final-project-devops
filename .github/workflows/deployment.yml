@@ -27,6 +27,13 @@ jobs:
         with:
           key: ${{ secrets.PRIVATE_KEY }}
           known_hosts: "just-a-placeholder-so-we-dont-get-errors"
+      - name: Create env file
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          docker_user: "${{ secrets.DOCKER_USER }}"
+          docker_token: "${{ secrets.DOCKER_TOKEN }}"
+          directory: ./ansible/group_vars
+          file_name: docker.env
       - name: run playbook
         run: |
           ansible-playbook deploy_server_app.yml --ssh-common-args='-o StrictHostKeyChecking=no'
