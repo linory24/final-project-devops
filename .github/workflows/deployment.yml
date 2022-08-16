@@ -36,4 +36,4 @@ jobs:
           file_name: docker.env
       - name: run playbook
         run: |
-          ansible-playbook deploy_server_app.yml --ssh-common-args='-o StrictHostKeyChecking=no'
+          ansible-playbook ./ansible/deploy_server_app.yml --ssh-common-args='-o StrictHostKeyChecking=no'
