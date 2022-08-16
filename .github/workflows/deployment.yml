@@ -30,8 +30,8 @@ jobs:
       - name: Create env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
-          docker_user: '${{ secrets.DOCKER_USER }}'
-          docker_token: '${{ secrets.DOCKER_TOKEN }}'
+          envkey_docker_user: '${{ secrets.DOCKER_USER }}'
+          envkey_docker_token: '${{ secrets.DOCKER_TOKEN }}'
           directory: ./ansible/group_vars
           file_name: docker.env
       - name: run playbook
