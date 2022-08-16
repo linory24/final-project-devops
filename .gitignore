@@ -18,7 +18,6 @@
 .env.test.local
 .env.production.local
 /ansible/group_vars/weather.env
-/ansible/group_vars/docker.env
 
 npm-debug.log*
 yarn-debug.log*
