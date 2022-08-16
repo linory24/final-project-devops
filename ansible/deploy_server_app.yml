@@ -112,7 +112,7 @@
   become: True
   gather_facts: True
   vars_files:
-    - group_vars/env
+    - group_vars/docker.env
   tasks:
     - name: install base packages
       yum:
@@ -140,6 +140,7 @@
           - docker-ce
           - docker-ce-cli
           - containerd.io
+          - docker-compose
         state: latest
         update_cache: true
 
@@ -149,5 +150,14 @@
         enabled: true
         state: started
 
+    - name: Login docker
+      shell: docker login -u {{ docker_user }} -p {{ docker_token }}
+
+    - name: Build image
+      shell: docker build . --tag {{ docker_user }}/weather:latest
+
+    - name: Push image to DockerHub
+      shell: docker push {{ docker_user }}/weather:latest
+
     - name: Start weather docker
-      shell: 'docker run -d -p 80:3000 -t --restart always --name weather hovav019/weather'
+      shell: 'docker run -d -p 80:3000 -t --restart always --name calc ${{ secrets.DOCKER_USER }}/weather'

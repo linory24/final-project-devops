@@ -1,10 +1,13 @@
-name: upload my image to DockerHub
+name: build and deploy weather image to server
 
 on:
   pull_request:
     branches: [main]
+    types:
+      - closed
 jobs:
   build:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -36,7 +39,5 @@ jobs:
           port: ${{ secrets.PORT }}
           script_stop: true
           script: |
-            sudo docker-compose down
-            sudo docker rmi ${{ secrets.DOCKER_USER }}/weather
-            sudo docker pull ${{ secrets.DOCKER_USER }}/weather
-            sudo docker-compose up -d
+            cd /opt/app
+            sudo docker-compose pull && sudo docker-compose up -d --force-recreate

@@ -1,4 +1,4 @@
-name: upload my image to DockerHub
+name: create infrastructure and site
 
 on:
   push:
