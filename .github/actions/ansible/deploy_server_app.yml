@@ -151,13 +151,13 @@
         state: started
 
     - name: Login docker
-      shell: docker login -u ${{ env.DOCKER_USER }} -p ${{ env.DOCKER_TOKEN }}
+      shell: docker login -u ${{ env.docker_user }} -p ${{ env.docker_token }}
 
     - name: Build image
-      shell: docker build . --tag ${{ env.DOCKER_USER }}/weather:latest
+      shell: docker build . --tag ${{ env.docker_user }}/weather:latest
 
     - name: Push image to DockerHub
-      shell: docker push ${{ env.DOCKER_USER }}/weather:latest
+      shell: docker push ${{ env.docker_user }}/weather:latest
 
     - name: Start weather docker
-      shell: "docker run -d -p 80:3000 -t --restart always --name weather ${{ env.DOCKER_USER }}/weather"
+      shell: "docker run -d -p 80:3000 -t --restart always --name weather ${{ env.docker_user }}/weather"
