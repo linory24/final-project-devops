@@ -157,8 +157,7 @@
         user: centos
         state: present
         key: "{{ url_key }}"
-      with_file:
-        - ~/.ssh/id_rsa
+        path: ~/.ssh/id_rsa
 
     - name: clone the app repo
       git:
