@@ -113,6 +113,7 @@
   gather_facts: True
   vars_files:
     - group_vars/env
+    - github/workspace/docker.env
   tasks:
     - name: install base packages
       yum:
@@ -151,13 +152,13 @@
         state: started
 
     - name: Login docker
-      shell: docker login -u ${{ env.docker_user }} -p ${{ env.docker_token }}
+      shell: docker login -u ${{ DOCKER_USER }} -p ${{ DOCKER_TOKEN }}
 
     - name: Build image
-      shell: docker build . --tag ${{ env.docker_user }}/weather:latest
+      shell: docker build . --tag ${{ DOCKER_USER }}/weather:latest
 
     - name: Push image to DockerHub
-      shell: docker push ${{ env.docker_user }}/weather:latest
+      shell: docker push ${{ DOCKER_USER }}/weather:latest
 
     - name: Start weather docker
-      shell: "docker run -d -p 80:3000 -t --restart always --name weather ${{ env.docker_user }}/weather"
+      shell: "docker run -d -p 80:3000 -t --restart always --name weather ${{ DOCKER_USER }}/weather"
