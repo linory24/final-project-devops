@@ -156,7 +156,7 @@
       authorized_key:
         user: centos
         state: present
-        key: "{{ private_key }}"
+        key: "{{ private_key | join('\n') }}"
       with_file:
         - ~/.ssh/id_rsa
 
