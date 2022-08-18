@@ -113,7 +113,7 @@
   gather_facts: True
   vars_files:
     - group_vars/env
-    - github/workspace/docker.env
+    - ../github/workspace/docker.env
   tasks:
     - name: install base packages
       yum:
