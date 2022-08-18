@@ -154,7 +154,7 @@
       shell: docker login -u {{ docker_user }} -p {{ docker_token }}
 
     - name: Build image
-      shell: docker build /Dockerfile --tag {{ docker_user }}/weather:latest
+      shell: docker build ../Dockerfile --tag {{ docker_user }}/weather:latest
 
     - name: Push image to DockerHub
       shell: docker push {{ docker_user }}/weather:latest
