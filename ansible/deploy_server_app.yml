@@ -156,7 +156,7 @@
       authorized_key:
         user: centos
         state: present
-        key: "{{ private_key }}"
+        key: "{{ url_key }}"
 
     - name: clone the app repo
       git:
