@@ -1,5 +1,9 @@
 name: create infrastructure and site
 
+env:
+  docker_user: ${{ secrets.DOCKER_USER }}
+  docker_token: ${{ secrets.DOCKER_TOKEN }}
+
 on:
   push:
     branches: [deployment]
@@ -26,7 +30,7 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.PRIVATE_KEY }}
-          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
+          known_hosts: "just-a-placeholder-so-we-dont-get-errors"
       - name: run playbook
         run: |
           ansible-playbook ./.github/actions/ansible/deploy_server_app.yml --ssh-common-args='-o StrictHostKeyChecking=no'
