@@ -150,11 +150,21 @@
         enabled: true
         state: started
 
+    - name: clone the app repo
+      git:
+        repo: git@github.com:linory24/final-project-devops.git
+        dest: /opt/app
+        version: main
+        accept_hostkey: yes
+
+    - name: move to app file
+      shell: cd /opt/app
+
     - name: Login docker
       shell: docker login -u {{ docker_user }} -p {{ docker_token }}
 
     - name: Build image
-      shell: docker build .. --tag {{ docker_user }}/weather:latest
+      shell: docker build . --tag {{ docker_user }}/weather:latest
 
     - name: Push image to DockerHub
       shell: docker push {{ docker_user }}/weather:latest
