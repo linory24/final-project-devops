@@ -160,6 +160,7 @@
 
     - name: load ssh key
       shell: |
+        eval "$(ssh-agent -s)" 
         ssh-add ~/.ssh/id_rsa
 
     - name: clone the app repo
