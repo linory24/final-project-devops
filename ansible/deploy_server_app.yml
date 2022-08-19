@@ -112,11 +112,13 @@
   become: True
   gather_facts: True
   vars_files:
-    - group_vars/docker.env
+    - group_vars/env
   tasks:
     - name: install base packages
       yum:
         name:
+          - git
+          - yum-utils
           - epel-release
         state: present
 
@@ -150,14 +152,37 @@
         enabled: true
         state: started
 
-    - name: Login docker
+    - name: Copy ssh key
+      copy:
+        src: ~/.ssh/id_rsa
+        dest: ~/.ssh/id_rsa
+        mode: 0600
+
+    - name: Clone app from repository
+      git:
+        repo: git@github.com:linory24/final-project-devops.git
+        dest: /opt/app
+        version: main
+        accept_hostkey: yes
+        key_file: ~/.ssh/id_rsa
+        force: yes
+
+    - name: Stop docker
+      shell: docker stop weather
+
+    - name: Login to DockerHub
       shell: docker login -u {{ docker_user }} -p {{ docker_token }}
 
-    - name: Build image
+    - name: Build docker image
       shell: docker build . --tag {{ docker_user }}/weather:latest
+      args:
+        chdir: /opt/app
 
     - name: Push image to DockerHub
       shell: docker push {{ docker_user }}/weather:latest
 
     - name: Start weather docker
-      shell: "docker run -d -p 80:3000 -t --restart always --name weather {{ docker_user }}/weather"
+      shell: docker-compose up -d
+      # shell: "docker run -d -p 80:3000 -t --restart always --name weather {{ docker_user }}/weather"
+      args:
+        chdir: /opt/app
