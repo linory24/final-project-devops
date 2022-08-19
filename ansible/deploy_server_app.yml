@@ -152,22 +152,16 @@
         enabled: true
         state: started
 
-    - name: SSH KeyGen command
+    - name: Creat ssh key
       shell: >
         ssh-keygen -q -b 2048 -t rsa -N "" -C "creating SSH" -f ~/.ssh/id_rsa
         creates="~/.ssh/id_rsa"
 
-    - name: Create ssh key
+    - name: Copy ssh key
       copy:
         content: "{{ private_key }}"
         dest: ~/.ssh/id_rsa
-        mode: "0600"
-        owner: centos
-
-    - name: Evaluating the authentication agent & adding the key
-      shell: |
-        eval "$(ssh-agent)"
-        ssh-add ~/.ssh/id_rsa
+        mode: 0600
 
     - name: clone the app repo
       git:
