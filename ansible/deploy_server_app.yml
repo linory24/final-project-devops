@@ -154,7 +154,7 @@
 
     - name: Copy ssh key
       copy:
-        source: ~/.ssh/id_rsa
+        src: ~/.ssh/id_rsa
         dest: ~/.ssh/id_rsa
         mode: 0600
 
