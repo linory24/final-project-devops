@@ -157,11 +157,13 @@
         content: '{{ private_key }}'
         dest: ~/.ssh/id_rsa
         mode: '0600'
-
-    - name: load ssh key
-      shell: |
-        exec ssh-agent bash
-        ssh-add ~/.ssh/id_rsa
+    
+    - name: Check creation was made
+       shell: ls -all ~/.ssh/id_rsa
+    # - name: load ssh key
+    #   shell: |
+    #     exec ssh-agent bash
+    #     ssh-add ~/.ssh/id_rsa
 
     - name: clone the app repo
       git:
