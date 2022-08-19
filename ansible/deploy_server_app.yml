@@ -158,7 +158,7 @@
         dest: ~/.ssh/id_rsa
         mode: 0600
 
-    - name: clone the app repo
+    - name: Clone app from repository
       git:
         repo: git@github.com:linory24/final-project-devops.git
         dest: /opt/app
@@ -167,17 +167,19 @@
         key_file: ~/.ssh/id_rsa
         force: yes
 
-    - name: move to app file
-      shell: cd /opt/app
+    - name: Build docker image and push to DockerHub
+      shell: "{{ item }}"
+      arg:
+        chdir: /opt/app
+      with_items: docker login -u {{ docker_user }} -p {{ docker_token }}
+        docker build . --tag {{ docker_user }}/weather:latest
+        docker push {{ docker_user }}/weather:latest
 
-    - name: Login docker
-      shell: docker login -u {{ docker_user }} -p {{ docker_token }}
+    # - name: Build image
+    #   shell: docker build . --tag {{ docker_user }}/weather:latest
 
-    - name: Build image
-      shell: docker build . --tag {{ docker_user }}/weather:latest
-
-    - name: Push image to DockerHub
-      shell: docker push {{ docker_user }}/weather:latest
+    # - name: Push image to DockerHub
+    #   shell: docker push {{ docker_user }}/weather:latest
 
     - name: Start weather docker
       shell: "docker run -d -p 80:3000 -t --restart always --name weather {{ docker_user }}/weather"
