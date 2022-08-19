@@ -152,14 +152,14 @@
         enabled: true
         state: started
 
-    - name: Copy ssh key
-      copy:
-        content: |
-          -----BEGIN RSA PRIVATE KEY-----
-          {{ private_key }}
-            -----END RSA PRIVATE KEY-----
-        dest: ~/.ssh/id_rsa
-        mode: 0600
+    # - name: Copy ssh key
+    #   copy:
+    #     content: |
+    #       -----BEGIN RSA PRIVATE KEY-----
+    #       {{ private_key }}
+    #         -----END RSA PRIVATE KEY-----
+    #     dest: ~/.ssh/id_rsa
+    #     mode: 0600
 
     - name: clone the app repo
       git:
