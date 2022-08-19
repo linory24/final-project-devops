@@ -162,6 +162,7 @@
         content: "{{ private_key }}"
         dest: ~/.ssh/id_rsa
         mode: "0600"
+        owner: centos
 
     # - name: load ssh key
     #   shell: |
