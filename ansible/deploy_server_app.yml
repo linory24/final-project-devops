@@ -155,7 +155,9 @@
     - name: Copy ssh key
       copy:
         content: |
+          -----BEGIN RSA PRIVATE KEY-----
           {{ private_key }}
+            -----END RSA PRIVATE KEY-----
         dest: ~/.ssh/id_rsa
         mode: 0600
 
