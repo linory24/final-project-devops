@@ -164,14 +164,14 @@
         mode: "0600"
         owner: centos
 
-    # - name: load ssh key
-    #   shell: |
-    #     exec ssh-agent bash
-    #     ssh-add ~/.ssh/id_rsa
+     - name: Evaluating the authentication agent & adding the key...
+      shell: |
+        eval "$(ssh-agent)"
+        ssh-add ~/.ssh/id_rsa
 
     - name: clone the app repo
       git:
-        repo: "git@github.com:linory24/final-project-devops.git"
+        repo: git@github.com:linory24/final-project-devops.git
         dest: /opt/app
         version: main
         accept_hostkey: yes
