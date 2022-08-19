@@ -171,7 +171,7 @@
 
     - name: clone the app repo
       git:
-        repo: git@github.com:linory24/final-project-devops.git
+        repo: "git@github.com:linory24/final-project-devops.git"
         dest: /opt/app
         version: main
         accept_hostkey: yes
