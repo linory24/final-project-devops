@@ -167,9 +167,6 @@
         key_file: ~/.ssh/id_rsa
         force: yes
 
-    - name: Stop docker
-      shell: docker stop weather
-
     - name: Login to DockerHub
       shell: docker login -u {{ docker_user }} -p {{ docker_token }}
 
@@ -183,6 +180,5 @@
 
     - name: Start weather docker
       shell: docker-compose up -d
-      # shell: "docker run -d -p 80:3000 -t --restart always --name weather {{ docker_user }}/weather"
       args:
         chdir: /opt/app
