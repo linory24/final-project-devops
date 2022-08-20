@@ -34,7 +34,7 @@ const App = () => {
             {Math.round(weather.main.temp - 273.15)}
             <sup>&deg;C</sup>
           </div>
-          <div>Hovav</div>
+          <div>Shiraz-Hovav-Linor</div>
           <div className="info">
             <img
               className="city-icon"
